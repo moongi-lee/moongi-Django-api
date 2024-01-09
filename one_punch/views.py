@@ -4,29 +4,23 @@ from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from one_punch.engine import CoupangEngine
+from one_punch.engine import CoupangEngine, TestEngine
 from one_punch.models import TestData
 from one_punch.serializers import BookSerializer
 
 
 class TestAPI(APIView):
-	# def get(self, request):
-	# 	test_data = TestData.objects.all()
-	# 	serializer = BookSerializer(test_data, many=True)
-	# 	return Response(serializer.data, status=status.HTTP_200_OK)
-
 	def get(self, request):
-		test_data = 55
-		# serializer = BookSerializer(test_data, many=True)
-		return Response(test_data, status=status.HTTP_200_OK)
+		keyword = "default"
+		if request.query_params.get("keyword"):
+			keyword = request.query_params.get("keyword")
+		else:
+			return Response("keyword를 입력해주세요.", status=status.HTTP_400_BAD_REQUEST)
 
-	def post(self, request):
-		serializer = BookSerializer(data=request.data)
-		if serializer.is_valid():
-			serializer.save()
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		new_test_engine = TestEngine(keyword)
+		new_test_engine.create_data()
 
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+		return Response(new_test_engine.data, status=status.HTTP_200_OK)
 
 
 class TotalAPI(APIView):
@@ -35,10 +29,16 @@ class TotalAPI(APIView):
 
 class CoupangAPI(APIView):
 
-	def get(self, request, keyword):
+	def get(self, request):
+		keyword = "default"
+		if request.query_params.get("keyword"):
+			keyword = request.query_params.get("keyword")
+		else:
+			return Response("keyword를 입력해주세요.", status=status.HTTP_400_BAD_REQUEST)
+
 		coupang = CoupangEngine(keyword)
 		coupang.create_data()
-		return Response([coupang.data], status=status.HTTP_200_OK)
+		return Response(coupang.data, status=status.HTTP_200_OK)
 
 
 class NaverAPI(APIView):
@@ -51,4 +51,3 @@ class DanawaAPI(APIView):
 
 class EstreetAPI(APIView):
 	pass
-
