@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'example',
     'one_punch',
-    'corsheaders',  # cors 적용
+    'corsheaders',  # cors 해제 적용
+    'utility_app',  # 유틸리티 앱
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # cors 적용
+    'corsheaders.middleware.CorsMiddleware',  # cors 해제 적용
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

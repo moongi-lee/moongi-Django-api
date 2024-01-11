@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('example/', include('example.urls')),
     path('one_punch/', include('one_punch.urls')),
+    path('utility_app/', include('utility_app.urls')),
 ]
