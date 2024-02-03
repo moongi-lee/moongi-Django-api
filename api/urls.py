@@ -22,4 +22,5 @@ urlpatterns = [
     path('example/', include('example.urls')),
     path('one_punch/', include('one_punch.urls')),
     path('utility_app/', include('utility_app.urls')),
+    path('power_tools/', include('power_tools.urls')),
 ]

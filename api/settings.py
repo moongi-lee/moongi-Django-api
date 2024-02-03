@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'one_punch',
     'corsheaders',  # cors 해제 적용
     'utility_app',  # 유틸리티 앱
+    'power_tools',  # 파워툴 앱
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,19 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# 이미지 처리 관련
+
+MAX_UPLOAD_SIZE = 5242880
+
+ALLOWED_FILE_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'application/pdf',
+]
+
+# 이미지 저장 경로
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
